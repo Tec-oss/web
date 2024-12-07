@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pasos de la Solución</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Pasos de la Solución</h1>
+
+        <!-- Botón para mostrar/ocultar la descripción -->
+        <div class="descripcion-toggle">
+            <button id="toggleDescription">Mostrar/Ocultar Descripción</button>
+        </div>
+
+        <!-- Descripción del Método Simplex -->
+        <section class="descripcion" id="descripcion">
+            <h2>Descripción del Método Simplex</h2>
+            <p>El método Simplex es un algoritmo iterativo que busca la solución óptima de un problema de programación lineal. 
+            A través de varias iteraciones, se realizan ajustes en la tabla para encontrar la mejor combinación de valores 
+            que maximice o minimice la función objetivo. A continuación, se muestran los pasos detallados de cómo se resuelve el problema.</p>
+        </section>
+        
+        <!-- Sección para mostrar los pasos y tablas -->
+            <h2>Iteraciones</h2>
+            <div id="steps-container"></div>
+            <!-- Las tablas generadas por JavaScript aparecerán aquí -->
+             
+        <div id="button-container">
+            <button class="btn primary"><a href="resMin.html">Volver</a></button>
+        </div>
+    </div>
+
+    <!-- Tu archivo JavaScript -->
+    <script src="steps.js"></script>
+
+    <!-- Script para mostrar/ocultar la descripción -->
+    <script>
+        document.getElementById('toggleDescription').addEventListener('click', function() {
+            const description = document.getElementById('descripcion');
+            if (description.style.display === 'none' || description.style.display === '') {
+                description.style.display = 'block';
+            } else {
+                description.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+
+</html>

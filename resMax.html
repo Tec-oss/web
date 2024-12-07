@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MaxiMiniWeb</title>
+    <!-- <script src="https://cdn.plot.ly/plotly-latest.min.js"></script> -->
+    <script src="https://cdn.plot.ly/plotly-2.35.2.min.js" charset="utf-8"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" integrity="sha512-BNaRQnYJYiPSqHHDb58B0yaPfCu+Wgds8Gp/gU33kqBtgNS4tSPHuGibyoeqMV/TJlSKda6FXzoEyYGjTe+vXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js" integrity="sha512-V/C9Axb8EEL4ix79ERIJmpRd6Mp1rWVSxa2PIBCdCxqhEsfCBWp/R0xJ4U495czhcuDWrGOFYo8+QI3lJ9DK5g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <style>
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+        h1, h2 {
+            text-align: center;
+        }
+
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header_section {
+            background-color: #343a40;
+            padding: 20px;
+            color: white;
+            text-align: center;
+        }
+
+        .header_section h1 {
+            font-size: 36px;
+            margin: 0;
+        }
+
+        .navbar {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .navbar a {
+            text-decoration: none;
+            color: white;
+            font-size: 18px;
+            margin: 0 15px;
+        }
+
+        .navbar a:hover {
+            color: #7bff61;
+        }
+
+        /* Estilo para la sección de resultados */
+        #results {
+            margin-top: 20px;
+            font-size: 18px;
+            line-height: 1.6;
+        }
+
+        /* Cuadro para la solución óptima */
+        .optimal-solution {
+            background-color: #33d6bb;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: bold;
+        }
+        .funcion-obejetivo {
+            background-color: #00ff88;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        /* Tabla de restricciones */
+        #constraint-table table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        #constraint-table th, #constraint-table td {
+            padding: 12px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+
+        #constraint-table th {
+            background-color: #20ca7b;
+            color: rgb(10, 9, 9);
+        }
+
+        /* Tabla de valores de las variables */
+        #variable-table table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        #variable-table th, #variable-table td {
+            padding: 12px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+
+        #variable-table th {
+            background-color: #10aa90;
+            color: rgb(8, 7, 7);
+        }
+
+        /* Estilo para los botones */
+        #button-container {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        button {
+            border: none; 
+            color: white; 
+            padding: 14px 28px; 
+            cursor: pointer; 
+            border-radius: 5px; 
+            display: inline-block;
+            margin: 5px;
+        }
+        .primary {background-image: linear-gradient(to right, #007bff, #4ab2e2);} 
+
+        button:hover {
+            background-color: #218838;
+            transform: scale(1.05);
+        }
+
+        button:active {
+            transform: scale(1);
+        }
+
+        /* Estilo para el gráfico */
+        #graph-container {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        #graph {
+            width: 100%;
+            height: 500px;
+            margin: 0 auto;
+        }
+        #slack-surplus-section {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        #slack-surplus-table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        #slack-surplus-table th, #slack-surplus-table td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+
+        #slack-surplus-table th {
+            background-color: #51cc93;
+            color: rgb(12, 12, 12);
+            font-weight: bold;
+        }
+
+        #slack-surplus-table td {
+            background-color: #f9f9f9;
+        }
+
+    </style>
+</head>
+<body>
+    
+    <div class="header_section">
+        <h1>Maximización</h1>
+        <nav class="navbar">
+            <a href="index.html">Aplicación</a>
+        </nav>
+    </div>
+
+    <div class="container">
+        <div id="results"></div>
+        <div id="constraint-table">
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th>Restricción</th>
+                        <th>Ecuación</th>
+                    </tr>
+                </thead>
+                <tbody id="constraint-values">
+                </tbody>
+            </table>
+        </div>
+
+        <div id="variable-table">
+            <h2>Valores de las Variables</h2>
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th>Variable</th>
+                        <th>Valor</th>
+                    </tr>
+                </thead>
+                <tbody id="variable-values">
+                </tbody>
+            </table>
+        </div>
+        <div id="slack-surplus-section">
+            <h2>Holgura/excedente y Precios Duales</h2>
+            <table id="slack-surplus-table">
+                <thead>
+                    <tr>
+                        <th>Restricción</th>
+                        <th>Holgura/excedente</th>
+                        <th>Precios Duales</th>
+                    </tr>
+                </thead>
+                <tbody id="slack-surplus-body">
+                </tbody>
+            </table>
+        </div>
+        
+        <div id="graph-container">
+            <h1>Solución mediante el Método Gráfico</h1>
+            <div id="graph"></div>
+        </div>
+
+        <div id="button-container">
+            <button class="btn primary" id="download-graph">Descargar Gráfico</button>
+            <button class="btn primary" id="download-pdf">Descargar PDF</button>
+            <button class="btn primary" onclick="window.location.href='pasos.html'">Pasos de la Solución</button>
+        </div>
+    </div>
+    <script src="max.js"></script>
+    <script>
+        const data = JSON.parse(localStorage.getItem('lp_data'));
+        if (!data) {
+            document.getElementById('results').innerHTML = '<p class="error">No hay datos disponibles.</p>';
+            console.error("No hay datos en localStorage.");
+        } else {
+            try {
+                console.log("Datos ingresados:", data);
+                const result = simplexMaximizacion(data);
+
+                if (!result || !result.solution || typeof result.optimalValue === 'undefined') {
+                    throw new Error("Resultado incompleto");
+                }
+
+                console.log("Resultado maximización:", result);
+                displayResults(result, data);
+
+                if (data.numVars === 2) {
+                    plotGraph(result, data);
+                } else {
+                    document.getElementById('graph-container').style.display = 'none';
+                }
+            } catch (error) {
+                document.getElementById('results').innerHTML = `<p class="error">Error: ${error.message}</p>`;
+                console.error("Error durante la ejecución", error);
+            }
+        }
+
+        function displayVariableValues(solution) {
+            const tbody = document.getElementById('variable-values');
+            tbody.innerHTML = '';  
+
+            solution.forEach((value, index) => {
+                const row = document.createElement('tr');
+                const cell1 = document.createElement('td');
+                cell1.textContent = `X${index + 1}`;
+                const cell2 = document.createElement('td');
+                cell2.textContent = value.toFixed(2); 
+                row.appendChild(cell1);
+                row.appendChild(cell2);
+                tbody.appendChild(row);
+            });
+        }
+
+        function displayResults(result, data) {
+            let html = `<div class="optimal-solution"><strong>Solución Óptima:</strong> ${result.optimalValue.toFixed(2)}</div>`;
+            
+            html += `<h2>Función Objetivo:</h2>`;
+            html += `<div class="funcion-obejetivo"><strong>Z =  `;
+            data.objective.forEach((coef, index) => {
+                const sign = coef >= 0 && index > 0 ? '+ ' : '';
+                html += `${sign}${coef.toFixed(2)}X${index + 1} `;
+            });
+            html += `</strong></div>`;
+
+            html += `<h2>Sujeto a:</h2>`;
+
+            // Llamar la función para mostrar los valores de las variables
+            displayVariableValues(result.solution);
+
+            // Llenar la tabla de restricciones
+            const constraintValues = document.getElementById('constraint-values');
+            data.constraints.forEach((constraint, index) => {
+                const row = document.createElement('tr');
+                const cell1 = document.createElement('td');
+                cell1.textContent = `Restricción ${index + 1}`;
+                const cell2 = document.createElement('td');
+                cell2.textContent = constraint.coefficients.map((coef, idx) => `${coef.toFixed(2)}X${idx + 1}`).join(' + ') + ` ${constraint.sign} ${constraint.value.toFixed(2)}`;
+                row.appendChild(cell1);
+                row.appendChild(cell2);
+                constraintValues.appendChild(row);
+            });
+
+            document.getElementById('results').innerHTML = html;
+        }
+
+        function plotGraph(result, data) {
+            const constraints = data.constraints;
+            const objective = data.objective;
+            const solution = result.solution;
+
+            let xValues = [];
+            let yValues = [];
+            constraints.forEach(constraint => {
+                const coefX = constraint.coefficients[0];
+                const coefY = constraint.coefficients[1];
+                const value = constraint.value;
+
+                if (coefY !== 0) {
+                    const y = (value - coefX * 0) / coefY;
+                    yValues.push(y);
+                }
+                if (coefX !== 0) {
+                    const x = (value - coefY * 0) / coefX;
+                    xValues.push(x);
+                }
+            });
+
+            const xMax = Math.max(...xValues, solution[0] * 1.5);
+            const yMax = Math.max(...yValues, solution[1] * 1.5);
+
+            let traces = [];
+            constraints.forEach((constraint, index) => {
+                const coefX = constraint.coefficients[0];
+                const coefY = constraint.coefficients[1];
+                const value = constraint.value;
+
+                let x = [0, value / coefX];
+                let y = [value / coefY, 0];
+
+                traces.push({
+                    x: x,
+                    y: y,
+                    mode: 'lines',
+                    name: `Restricción ${index + 1}`,
+                    line: { dash: 'solid' }
+                });
+            });
+
+            traces.push({
+                x: [solution[0]],
+                y: [solution[1]],
+                mode: 'markers',
+                name: 'Solución Óptima',
+                marker: { color: 'blue', size: 10 }
+            });
+
+            const objX = [0, (result.optimalValue / objective[0])];
+            const objY = [result.optimalValue / objective[1], 0];
+            traces.push({
+                x: objX,
+                y: objY,
+                mode: 'lines',
+                name: 'Función Objetivo',
+                line: { color: 'red' }
+            });
+
+            let xRegion = [];
+            let yRegion = [];
+            const step = 0.1;
+            for (let x = 0; x <= xMax; x += step) {
+                for (let y = 0; y <= yMax; y += step) {
+                    let isValid = true;
+                    for (let constraint of constraints) {
+                        const coefX = constraint.coefficients[0];
+                        const coefY = constraint.coefficients[1];
+                        const value = constraint.value;
+                        if (coefX * x + coefY * y > value) {
+                            isValid = false;
+                            break;
+                        }
+                    }
+                    if (isValid) {
+                        xRegion.push(x);
+                        yRegion.push(y);
+                    }
+                }
+            }
+
+            traces.push({
+                x: xRegion,
+                y: yRegion,
+                mode: 'markers',
+                name: 'Región Factible',
+                marker: { color: 'orange', size: 4 }
+            });
+
+            const layout = {
+              title: {
+              text: 'Gráfico de Maximización',
+              font: {
+                  family: 'Comic Sans MS',  // Tipo de letra
+                  size: 24,                // Tamaño
+                  color: 'darkred'         // Color
+              },
+              x: 0.5,  // Alineación horizontal (0.5 = centro)
+              y: 0.95, // Alineación vertical
+          },
+              showlegend: true,
+              legend: {
+                  font: {
+                      family: 'Courier New, monospace', // Fuente de la leyenda
+                      size: 16,                         // Tamaño de la fuente
+                      color: 'purple'                   // Color de la fuente
+                  },
+                  bgcolor: 'lightyellow',               // Fondo de la leyenda
+                  bordercolor: 'black',                 // Borde de la leyenda
+                  borderwidth: 2                        // Grosor del borde de la leyenda
+              },
+              xaxis: {
+              title: {
+                  text: 'X1',
+                  font: {
+                      family: 'Arial, sans-serif', // Fuente de la etiqueta
+                      size: 18,                    // Tamaño de la fuente
+                      color: 'blue'                // Color de la fuente
+                  },
+              },
+              range: [0, xMax],
+              zeroline: true,
+              showgrid: false
+          },
+          yaxis: {
+              title: {
+                  text: 'X2',
+                  font: {
+                      family: 'Arial, sans-serif', // Fuente de la etiqueta
+                      size: 18,                    // Tamaño de la fuente
+                      color: 'green'               // Color de la fuente
+                  },
+              },
+              range: [0, yMax],
+              zeroline: true,
+              showgrid: false
+          },
+          plot_bgcolor: 'lightgray',
+          showlegend: true
+          };
+            const config = {
+                displayModeBar: false
+            };
+
+            Plotly.newPlot('graph', traces, layout, config);
+        }
+        document.getElementById('download-graph').addEventListener('click', () => {
+            Plotly.downloadImage('graph', { format: 'png', filename: 'grafico_maximizacion' });
+        });
+        
+        /*AQUI VIENE EL PDF*/
+        document.getElementById('download-pdf').addEventListener('click', async () => {
+            try {
+                const element = document.querySelector('.container'); // Elemento a capturar
+
+                // Capturar como imagen usando html2canvas
+                const canvas = await html2canvas(element, {
+                    scale: 2, // Aumenta la resolución de la imagen
+                    useCORS: true // Permitir recursos externos si los hay
+                });
+
+                const imgData = canvas.toDataURL('image/png');
+
+                // Crear documento PDF
+                const { jsPDF } = window.jspdf;
+                const pdf = new jsPDF({
+                    orientation: 'portrait',
+                    unit: 'px',
+                    format: 'a4'
+                });
+
+                const pdfWidth = pdf.internal.pageSize.getWidth();
+                const pdfHeight = pdf.internal.pageSize.getHeight();
+
+                // Calcular las dimensiones escaladas de la imagen
+                const imgWidth = pdfWidth;
+                const imgHeight = (canvas.height * pdfWidth) / canvas.width;
+
+                // Dividir en páginas si la imagen es más alta que el PDF
+                let yPosition = 0;
+                while (yPosition < canvas.height) {
+                    const section = canvas.getContext('2d').getImageData(0, yPosition, canvas.width, pdfHeight * canvas.width / pdfWidth);
+                    const tempCanvas = document.createElement('canvas');
+                    tempCanvas.width = canvas.width;
+                    tempCanvas.height = section.height;
+
+                    const tempCtx = tempCanvas.getContext('2d');
+                    tempCtx.putImageData(section, 0, 0);
+
+                    const sectionImg = tempCanvas.toDataURL('image/png');
+
+                    pdf.addImage(sectionImg, 'PNG', 0, 0, imgWidth, (section.height * imgWidth) / canvas.width);
+                    yPosition += tempCanvas.height;
+
+                    if (yPosition < canvas.height) pdf.addPage(); // Añadir nueva página si queda contenido
+                }
+
+                // Descargar el PDF
+                pdf.save('resultadosMaximizacion.pdf');
+            } catch (error) {
+                console.error('Error al generar el PDF:', error);
+                alert('Hubo un problema al generar el PDF. Por favor, intenta nuevamente.');
+            }
+        });
+
+
+        if (data.numVars === 2) {
+            plotGraph(result, data);
+        } else {
+            document.getElementById('graph-container').style.display = 'none';
+        }
+        if (data.numVars !== 2) {
+            document.getElementById('download-graph').style.display = 'none';
+        }
+
+        
+    </script>
+
+</body>
+</html>
