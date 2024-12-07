@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet" href="../MaxiMiniWeb/css/style.css">
+    <title>MaxiMiniWeb</title>
+    <style>
+        /* Fondo de video */
+        .hero_area video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+    
+        /* Barra de navegación */
+        .header_section {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.8);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 10;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
+        }
+    
+        .navbar a, .navbar-brand {
+            color: #12f399;
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+    
+        .navbar a:hover {
+            color: white;
+        }
+    
+        h1 {
+            color: #12f399;
+            text-align: center;
+            margin-top: 100px;
+            font-size: 2.5rem;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+        }
+    
+        /* Estilo del formulario */
+        form {
+            padding: 40px;
+            background: rgba(0, 0, 0, 0.7);
+            margin-top: 20px;
+            border-radius: 15px;
+            max-width: 800px;
+            margin: 20px auto;
+            color: white;
+            max-height: 70vh;
+            overflow-y: auto;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
+        }
+    
+        .form-container {
+            overflow-x: auto;
+            max-width: 100%;
+        }
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: none; 
+            margin: 0;
+        }
+        input[type="number"] {
+            -moz-appearance: textfield; 
+        }
+    
+        input[type="number"],
+        select {
+            padding: 10px;
+            margin: 10px 0 20px;
+            border: 1px solid #12f399;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            font-size: 1rem;
+            text-align: center;
+            box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.5);
+        }
+    
+        input[type="number"]:focus,
+        select:focus {
+            outline: none;
+            border-color: #fff;
+            background: rgba(0, 0, 0, 0.9);
+        }
+
+        #objective-function input[type="number"],
+        #constraints input[type="number"] {
+            width: 70px;
+            height: 40px;
+        }
+        button {
+            display: block;
+            margin: 20px auto;
+            padding: 12px 30px;
+            background-color: #12f399;
+            color: #000;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.4);
+        }
+    
+        button:hover {
+            background-color: #0a9e76;
+            transform: scale(1.05);
+        }
+    
+        /* Animación para el degradado */
+        @keyframes gradientAnimation {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        /* Encabezado con degradado animado */
+        th {
+            background: linear-gradient(45deg, #12f399, #0a9e76, #12f399);
+            background-size: 200% 200%;
+            animation: gradientAnimation 3s ease infinite;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            font-weight: bold;
+        }
+
+        /* Estilo del formulario */
+        form {
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            margin-top: 20px;
+            border-radius: 10px;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+            color: white;
+            overflow-y: auto;
+        }
+
+        /* Estilo de las tablas */
+        table {
+            width: 100%;
+            border-spacing: 0;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+        }
+    
+        th, td {
+            text-align: center;
+            padding: 12px;
+            border: 1px solid #12f399;
+        }
+    
+        th {
+            background-color: #12f399;
+            color: black;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
+        }
+    
+        td {
+            background-color: rgba(0, 0, 0, 0.6);
+        }
+    
+        table input[type="number"],
+        table select {
+            margin: 0;
+            padding: 8px;
+            width: 70%;
+            border: 1px solid #12f399;
+            border-radius: 5px;
+            text-align: center;
+            color: white;
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.5);
+        }
+    
+        /* Footer */
+        footer {
+            background-color: rgba(0, 0, 0, 0.9);
+            color: white;
+            text-align: center;
+            padding: 20px;
+            bottom: 0;
+            width: 100%;
+            margin-top: 20px;
+            box-shadow: 0px -4px 8px rgba(0, 0, 0, 0.5);
+        }
+    
+        footer p {
+            margin: 0;
+            font-size: 0.9rem;
+            color: #12f399;
+        }
+    </style>
+    
+</head>
+<body>
+
+    <!-- Fondo de video -->
+    <div class="hero_area">
+        <video autoplay loop muted>
+            <source src="Wii.mp4" type="video/mp4">
+        </video>
+
+        <!-- Navbar -->
+        <header class="header_section">
+            <div class="container-fluid">
+                <nav class="navbar navbar-expand-lg custom_nav-container">
+                    <a class="navbar-brand" href="index.html">
+                        <span>Desarrollo</span>
+                    </a>
+
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent"></div>
+                </nav>
+            </div>
+        </header>
+    </div>
+    <h1>INGRESA LOS DATOS DEL PROBLEMA</h1>
+        <!-- Formulario -->
+        <form id="input-form">
+            <div class="form-container">
+                <h2>Función Objetivo</h2>
+                <div id="objective-function"></div>
+
+                <h2>Restricciones</h2>
+                <div id="constraints"></div>
+            </div>
+
+            <button id="btnsubmit" type="submit">Calcular</button>
+        </form>
+
+        <!-- Footer -->
+        <footer>
+            <p>&copy; 2024 MaxiMiniWeb. Todos los derechos reservados.</p>
+        </footer>
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const numVars = parseInt(params.get('numVars'));
+        const numConstraints = parseInt(params.get('numConstraints'));
+        const optimization = params.get('optimization');
+
+        const objectiveDiv = document.getElementById('objective-function');
+        let objHTML = '<table id="objective-table">';
+        objHTML += '<thead><tr>';
+        for (let i = 0; i < numVars; i++) {
+            objHTML += `<th>X${i + 1}</th>`;
+        }
+        objHTML += '</tr></thead>';
+        objHTML += '<tbody><tr>';
+        for (let i = 0; i < numVars; i++) {
+            objHTML += `
+                <td>
+                    <input type="number" id="obj_coef_${i}" step="any" name="obj_coef_${i}" required>
+                </td>
+            `;
+        }
+        objHTML += '</tr></tbody>';
+        objHTML += '</table>';
+        objectiveDiv.innerHTML = objHTML;
+        const constraintsDiv = document.getElementById('constraints');
+        let constrHTML = '<table>';
+        for (let i = 0; i < numConstraints; i++) {
+            constrHTML += '<tr>';
+            for (let j = 0; j < numVars; j++) {
+                constrHTML += `
+                    <td>
+                        <input type="number" step="any" name="constr_${i}_coef_${j}" required>
+                    </td>
+                `;
+            }
+            constrHTML += `
+                <td>
+                    <select name="constr_${i}_sign">
+                        <option value="<=">&le;</option>
+                        <option value=">=">&ge;</option>
+                        <option value="=">=</option>
+                    </select>
+                </td>
+                <td>
+                    <input type="number" step="any" name="constr_${i}_value" required>
+                </td>
+            `;
+            constrHTML += '</tr>';
+        }
+        constrHTML += '</table>';
+        constraintsDiv.innerHTML = constrHTML;
+
+        // Manejar el envío del formulario
+        document.getElementById('input-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+            const data = {
+                numVars,
+                numConstraints,
+                optimization,
+                objective: [],
+                constraints: []
+            };
+            for (let i = 0; i < numVars; i++) {
+                data.objective.push(parseFloat(formData.get(`obj_coef_${i}`)));
+            }
+
+            for (let i = 0; i < numConstraints; i++) {
+                const constraint = {
+                    coefficients: [],
+                    sign: formData.get(`constr_${i}_sign`),
+                    value: parseFloat(formData.get(`constr_${i}_value`))
+                };
+                for (let j = 0; j < numVars; j++) {
+                    constraint.coefficients.push(parseFloat(formData.get(`constr_${i}_coef_${j}`)));
+                }
+                data.constraints.push(constraint);
+            }
+
+            const targetPage = optimization === 'Maximizar'
+                ? 'resMax.html'
+                : 'resMin.html';
+
+            localStorage.setItem('lp_data', JSON.stringify(data));
+            window.location.href = targetPage;
+        });
+    </script>
+
+</body>
+</html>

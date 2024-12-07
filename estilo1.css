@@ -1,0 +1,80 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 0;
+}
+.container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Encabezado */
+.header_section {
+    background-color: #343a40;
+    padding: 20px;
+    color: white;
+    text-align: center;
+}
+.header_section h1 {
+    font-size: 36px;
+    margin: 0;
+}
+.navbar {
+    text-align: center;
+    margin-top: 10px;
+}
+.navbar a {
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+    margin: 0 15px;
+}
+.navbar a:hover {
+    color: #ff6f61;
+}
+
+/* Sección de resultados */
+#results {
+    margin-top: 20px;
+    font-size: 18px;
+    line-height: 1.6;
+}
+.error {
+    color: red;
+}
+
+/* Tabla de valores */
+#variable-table table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+#variable-table th, #variable-table td {
+    padding: 12px;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+#variable-table th {
+    background-color: #007bff;
+    color: white;
+}
+
+/* Gráfico */
+#graph-container {
+    margin-top: 40px;
+    text-align: center;
+}
+
+/* Pie de página */
+footer {
+    background-color: #343a40;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../MaxiMiniWeb/css/style.css">
+    <title>Formulario de Variables y Restricciones</title>
+    <style>
+        /* Fondo de video */
+        #background-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+
+        /* Estilo de la barra de navegación */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.6);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 10;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .logo-img {
+            width: 40px;
+            margin-right: 10px;
+        }
+
+        ul {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        ul li {
+            margin: 0 20px;
+            position: relative;
+        }
+
+        ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.1rem;
+        }
+
+        ul li a:hover {
+            color: #12f399;
+        }
+
+        ul li ul {
+            display: none;
+            position: absolute;
+            background-color: rgba(0, 0, 0, 0.9);
+            top: 30px;
+            left: 0;
+            padding: 10px;
+            list-style: none;
+        }
+
+        ul li:hover ul {
+            display: block;
+        }
+
+        ul li ul li a {
+            color: #fff;
+            font-size: 1rem;
+            padding: 5px 10px;
+        }
+
+        ul li ul li a:hover {
+            color: #12f399;
+        }
+
+        /* Estilo del formulario */
+        form {
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            margin-top: 100px;
+            border-radius: 10px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+            color: white;
+        }
+
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0 20px;
+            border: 1px solid #12f399;
+            border-radius: 5px;
+            background: transparent;
+            color: rgb(245, 242, 242); /* Cambio Aqui */
+            font-size: 1rem;
+        }
+
+        input[type="number"]:focus,
+        select:focus {
+            outline: none;
+            border-color: #fff;
+        }
+
+        select {
+            background-color: #333;  /* Fondo oscuro */
+            color: white;  /* Texto blanco para las opciones */
+            border: 1px solid #12f399; /* Color del borde */
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        select:focus {
+            outline: none;  
+            background-color: #444; 
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #12f399;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0a9e76;
+        }
+    </style>
+</head>
+<body>
+    <!-- Video de fondo -->
+    <video id="background-video" autoplay muted loop>
+        <source src="Wii.mp4" type="video/mp4">
+    </video>
+
+    <!-- Navbar -->
+    <nav>
+      <div class="logo">
+          <img src="logo.png" alt="Logo" class="logo-img">
+          MaxiMiniWeb
+      </div>
+      <ul>
+          <li>
+              <a href="../MaxiMiniWeb/indexprincipal.html">Inicio</a>
+              <ul>
+                  <li><a href="#intro">Introducción</a></li>
+                  <li><a href="#justificacion">Justificación</a></li>
+                  <li><a href="#objetivos">Objetivos</a></li>
+                  <li><a href="#metodo">Método</a></li>
+              </ul>
+          </li>
+          <li><a href="../MaxiMiniWeb/index.html">Aplicacion</a></li>
+          <!-- Enlace corregido para que apunte a final.html -->
+          <li><a href="../MaxiMiniWeb/final.html">Resultados</a></li> <!-- Aquí fue la corrección -->
+      </ul>
+  </nav>
+  
+
+    <!-- Formulario -->
+    <form id="initial-form">
+        <label for="num_vars">Número de variables:</label>
+        <input type="number" id="num_vars" min="1" required>
+
+        <label for="num_constraints">Número de restricciones:</label>
+        <input type="number" id="num_constraints" min="1" required>
+
+        <label for="optimization">Objetivo:</label>
+        <select id="optimization">
+            <option value="Maximizar">Maximizar</option>
+            <option value="Minimizar">Minimizar</option>
+        </select>
+
+        <button id="btnsubmit" type="submit">Llenar Datos</button>
+    </form>
+
+    <!-- JavaScript -->
+    <script>
+        document.getElementById('initial-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const numVars = document.getElementById('num_vars').value;
+            const numConstraints = document.getElementById('num_constraints').value;
+            const optimization = document.getElementById('optimization').value;
+
+            const targetPage = 'input.html?numVars=' + numVars + '&numConstraints=' + numConstraints + '&optimization=' + optimization;
+
+            window.location.href = targetPage;
+        });
+    </script>
+</body>
+</html>

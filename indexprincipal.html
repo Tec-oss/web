@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../MaxiMiniWeb/css/style.css">
+    <title>Index Principal</title>
+</head>
+<body>
+    <!-- Video de fondo -->
+    <video id="background-video" autoplay muted loop>
+        <source src="Wii.mp4" type="video/mp4">
+    </video>
+
+    <!-- Navbar -->
+    <nav>
+        <div class="logo">
+            <img src="logo.png" alt="Logo" class="logo-img">
+            MaxiMiniWeb
+        </div>
+        <ul>
+            <li>
+                <a href="indexprincipal.html">Inicio</a> 
+                <ul>
+                    <li><a href="indexprincipal.html#intro">Introducción</a></li>
+                    <li><a href="indexprincipal.html#justificacion">Justificación</a></li>
+                    <li><a href="indexprincipal.html#objetivos">Objetivos</a></li>
+                    <li><a href="indexprincipal.html#metodo">Método</a></li>
+                    <li><a href="indexprincipal.html#ejemplos">Ejemplos</a></li>
+                </ul>
+            </li>
+            <li><a href="index.html">Aplicación</a></li>
+            <li><a href="final.html">Resultados</a></li> 
+        </ul>
+    </nav>
+
+    <!-- Contenido principal -->
+    <section id="contenido" style="margin-top: 100px; padding: 50px; background: rgba(255, 255, 255, 0.1);">
+        <div style="text-align: center; margin-bottom: 40px;">
+            <h1 style="font-size: 3rem; color: #12f399; animation: fadeIn 2s;">MaxiMiniWeb: Resolución Online de Problemas de Maximización y Minimización</h1>
+            <p style="font-size: 1.2rem; color: #fff;">Presentamos....</p>
+        </div>
+        <div class="cards-container">
+            <!-- Card: Introducción -->
+            <div class="card" id="intro">
+                <div class="card-image" style="background-image: url('../MaxiMiniWeb/Intro.jpg');"></div>
+                <div class="card-content">
+                    <h3>Introducción</h3>
+                    <p>La programación lineal es clave en la optimización en sectores como producción y 
+                        logística. El proyecto "MaxiMiniWeb: Resolución Online de Problemas de
+                         Maximización y Minimización" busca desarrollar una plataforma web interactiva 
+                         que permita modelar y resolver problemas matemáticos de optimización de forma 
+                         dinámica. Los usuarios podrán ingresar restricciones y variables, visualizar
+                          soluciones gráficas en tiempo real y obtener resultados detallados paso a paso.
+                        </p>
+                </div>
+            </div>
+            <!-- Card: Justificación -->
+            <div class="card" id="justificacion">
+                <div class="card-image" style="background-image: url('../MaxiMiniWeb/2Justi.png');"></div>
+                <div class="card-content">
+                    <h3>Justificación</h3>
+                    <p>En un mundo donde la optimización de recursos es clave para el éxito, 
+                        <strong>MaxiMiniWeb:</strong> surge como una plataforma en línea que
+                         permite resolver problemas de maximización y minimización de manera 
+                         rápida, accesible y eficiente. Diseñada para usuarios de sectores como 
+                         educación, investigación e industria, elimina la necesidad de software 
+                         especializado o conocimientos avanzados. </p>
+                </div>
+            </div>
+            
+            <!-- Card: Objetivos -->
+            <div class="card" id="objetivos">
+                <div class="card-image" style="background-image: url('../MaxiMiniWeb/3Obejtivo.jpg');"></div>
+                <div class="card-content">
+                    <h3>Objetivo General</h3>
+                    <p>Desarrollar MaxiMiniWeb, una plataforma en línea que permite a los usuarios modelar y resolver en tiempo real problemas matemáticos de maximización y minimización, facilitando su comprensión a través de gráficos interactivos y soluciones detalladas paso a paso.</p>
+                    
+                </div>
+            </div>
+            <div style="display: flex; justify-content: space-between; gap: 20px; padding: 20px;">
+                <!-- Card: Objetivos -->
+                <div class="card" style="width: 30%; max-width: 100%; padding: 20px;">
+                    <div class="card-image" style="background-image: url('../MaxiMiniWeb/4Espe.jpg'); height: 200px; background-size: cover; background-position: center;"></div>
+                    <div class="card-content">
+                        <h3>Objetivos Especificos</h3>
+                        <p>&#8226;Diseñar una interfaz intuitiva que permite la entrada dinámica de restricciones y variables para modelar problemas matemáticos.
+                           <br><br> &#8226;Implementar gráficos interactivos generados en tiempo real.
+                            <br><br>&#8226;Incorporar un sistema de solución computacional que desglose los cálculos en pasos detallados y comprensibles para los usuarios.
+                            <br><br>&#8226;Garantizar que la plataforma sea accesible y escalable, con un enfoque en el rendimiento y la experiencia del usuario.
+                            <br><br>&#8226;aProbar y validar la funcionalidad de la plataforma con ejemplos prácticos como los casos de RMC o M&D Chemicals.
+                        </p>
+                    </div>
+                </div>
+            
+                <!-- Card: Método -->
+                <div class="card" id="metodo" style="width: 70%; max-width: 100%; padding: 20px;">
+                    <div class="card-image" style="background-image: url('../MaxiMiniWeb/5metodo.jpg'); height: 200px; background-size: cover; background-position: center;"></div>
+                    <div class="card-content" style="padding: 20px; box-sizing: border-box;">
+                        <h3>Método</h3>
+                        <p>Descubre el enfoque teórico y metodológico empleado en este trabajo.</p>
+                        <div>
+                            <h4>1. Programación Lineal</h4>
+                            <p style="text-indent: 30px;"><strong>Definición:</strong> La programación lineal es una técnica matemática utilizada para optimizar una función objetivo sujeta a restricciones lineales, aplicada en áreas como economía, ingeniería y logística.</p>
+                            <p style="text-indent: 30px;"><strong>Función Objetivo:</strong> Es la ecuación que representa el objetivo del problema (maximizar o minimizar). Ejemplo: Z = 3x1 + 2x2.</p>
+                            <p style="text-indent: 30px;"><strong>Restricciones:</strong> Son ecuaciones o desigualdades lineales que limitan las soluciones posibles. Ejemplo: x1 + x2 ≤ 5.</p>
+            
+                            <h4>2. Métodos de Resolución</h4>
+
+                            <p style="text-indent: 30px;">
+                                <strong>Método Gráfico:</strong> Ideal para problemas con dos variables. Consiste en trazar las restricciones en un plano cartesiano y evaluar la función objetivo en los vértices de la región factible. Limitado a problemas de baja dimensión.
+                            </p>
+                            <div style="text-align: center; margin-bottom: 20px;">
+                                <iframe width="560" height="315" src="https://www.youtube.com/embed/SN3zn4G8ekU?si=R1OqOO-MAh8NGMdt" 
+                                title="Método Gráfico" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
+
+                            <p style="text-indent: 30px;">
+                                <strong>Método Simplex:</strong> Algoritmo iterativo utilizado para problemas con múltiples variables. Navega entre los vértices de la región factible hasta encontrar la solución óptima. Es útil para problemas complejos.
+                            </p>
+                            <div style="text-align: center; margin-bottom: 20px;">
+                                <iframe width="560" height="315" src="https://www.youtube.com/embed/gLLH4-3Mtws?si=DpFvILzlrsE4-HRS" 
+                                title="Método Simplex" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
+                            <h4>3. Casos Especiales en Programación Lineal</h4>
+                            <p style="text-indent: 30px;"><strong>Soluciones Óptimas Alternas:</strong> Ocurren cuando existen múltiples soluciones que cumplen el objetivo.</p>
+                            <p style="text-indent: 30px;"><strong>Infactibilidad:</strong> Sucede cuando no hay solución que cumpla todas las restricciones.</p>
+                            <p style="text-indent: 30px;"><strong>Ilimitación:</strong> Se da cuando la función objetivo puede continuar aumentando o disminuyendo sin restricción alguna.</p>
+            
+                        </div>
+                    </div>
+                </div>
+            
+
+
+            </div>
+            <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; margin: 20px auto; max-width: 1200px;">
+                <!-- Primera tarjeta: Herramientas Tecnológicas -->
+                <div style="flex: 1; min-width: 48%; background-color: #ffffff22; border: 1px solid #ddd; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); overflow: hidden;">
+                    <div class="card-content" style="padding: 20px;">
+                        <h4 style="margin-bottom: 15px; font-family: 'Arial', sans-serif; color: #010101;">4.4 Herramientas Tecnológicas para Resolución</h4>
+                        <p style="font-size: 16px; color: #fffbfb; line-height: 1.6;">
+                            En el contexto de una plataforma web como MaxiMiniWeb, se emplean herramientas tecnológicas modernas para facilitar la resolución de problemas de programación lineal:
+                        </p>
+                        <ul style="font-size: 16px; color: #f3ebeb; line-height: 1.6; margin: 10px 0;">
+                            <li><strong>Frontend:</strong> Tecnologías como HTML, CSS y JavaScript para el diseño de interfaces interactivas.</li>
+                            <li><strong>Bibliotecas de Gráficos:</strong> Herramientas como Plotly para visualizar las regiones factibles y las soluciones gráficas.</li>
+                            
+                        </ul>
+                        <h4 style="margin-top: 20px; color: #0e0e0e;">4.5 Aplicaciones de la Programación Lineal</h4>
+                        <ul style="font-size: 16px; color: #e1d6d6; line-height: 1.6; margin: 10px 0;">
+                            <li><strong>Producción y Manufactura:</strong> Optimización de recursos para maximizar la producción.</li>
+                            <li><strong>Transporte y Logística:</strong> Reducción de costos en rutas de distribución.</li>
+                            <li><strong>Planificación Financiera:</strong> Maximización de inversiones o minimización de riesgos.</li>
+                        </ul>
+                        <p style="font-size: 16px; color: #f3f2f2; line-height: 1.6; margin-top: 10px;">
+                            Con estas bases teóricas, MaxiMiniWeb busca proporcionar una herramienta práctica y accesible que combine la teoría de la programación lineal con tecnologías avanzadas para su resolución eficiente.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Segunda tarjeta: Ejemplos -->
+                <div style="flex: 1; min-width: 48%; background-color: #ffffff10; border: 1px solid #ddd; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); overflow: hidden;">
+                    <div class="card-content" id="ejemplos" style="padding: 20px; text-align: center;">
+                        <h4 style="margin-bottom: 15px; font-family: 'Arial', sans-serif; color: #050505;">EJEMPLOS</h4>
+                        <p style="font-size: 16px; color: #fff9f9; line-height: 1.6;">
+                            Aquí puedes observar ejemplos gráficos de soluciones para problemas de optimización, 
+                            utilizando métodos como el Método Gráfico y el Método Simplex.
+                        </p>
+                        <!-- Incrustar PDF en el mismo contenedor -->
+                        <div style="margin-top: 20px; border: 1px solid #ddd; border-radius: 8px; overflow: hidden;">
+                            <iframe src="../MaxiMiniWeb/ejemplos.pdf" style="width: 100%; height: 300px;" frameborder="0"></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+    </section>
+
+    <footer>
+        <p>© 2024 MaxiMiniWeb. Todos los derechos reservados.</p>
+    </footer>
+</body>
+</html>
